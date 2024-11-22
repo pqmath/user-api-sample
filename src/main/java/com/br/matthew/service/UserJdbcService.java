@@ -81,13 +81,17 @@ public class UserJdbcService implements UserRepositoryJdbc {
 		return null;
 	}
 
-	private User instantiateUser(ResultSet rs) throws SQLException {
+	private User instantiateUser(ResultSet rs){
 
+		try {
 		User user = new User();
-		user.setId(rs.getLong("id"));
+			user.setId(rs.getLong("id"));
 		user.setName(rs.getString("name"));
 		user.setSurname(rs.getString("surname"));
 		return user;
+		} catch (SQLException e) {
+			throw new JdbcException(e.getMessage());
+		}
 	}
 
 	public List<User> findAll() {

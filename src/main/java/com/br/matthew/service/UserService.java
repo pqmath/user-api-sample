@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.br.matthew.entity.User;
+import com.br.matthew.exceptions.ExceptionHandler;
 import com.br.matthew.repository.UserRepository;
 
 @Service
@@ -19,7 +20,7 @@ public class UserService {
 	}
 
 	public User findById(Long id) {
-		return repository.findById(id).orElseThrow();
+		return repository.findById(id).orElseThrow(() -> new ExceptionHandler("User not found."));
 	}
 
 	public User create(User user) {
@@ -28,7 +29,7 @@ public class UserService {
 
 	public User update(User user) {
 
-		User userDb = repository.findById(user.getId()).orElseThrow(() -> new RuntimeException("User not found."));
+		User userDb = repository.findById(user.getId()).orElseThrow(() -> new ExceptionHandler("User not found."));
 
 		userDb.setName(user.getName());
 		userDb.setSurname(user.getSurname());
@@ -38,7 +39,7 @@ public class UserService {
 	public void deleteById(Long id) {
 		var userDb = repository.findById(id);
 		if (userDb.isEmpty()) {
-			throw new RuntimeException("This user doesn't exist!");
+			throw new ExceptionHandler("This user doesn't exist!");
 		}
 		repository.deleteById(id);
 	}

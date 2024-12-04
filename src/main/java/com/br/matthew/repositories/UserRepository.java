@@ -1,4 +1,4 @@
-package com.br.matthew.repository;
+package com.br.matthew.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.br.matthew.entity.User;
 import com.br.matthew.exceptions.ExceptionHandler;
-import com.br.matthew.repository.UserRepository;
+import com.br.matthew.repositories.UserRepository;
 
 @Service
 public class UserService {
